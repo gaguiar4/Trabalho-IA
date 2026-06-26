@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react'
-import { getHistory } from '../services/chatService.js'
+import { listSessions } from '../services/chatService.js'
 
 export function useHistory() {
   const [sessions, setSessions] = useState([])
@@ -10,8 +10,8 @@ export function useHistory() {
     setIsLoadingSessions(true)
     setErrorSessions(null)
     try {
-      const response = await getHistory('')
-      setSessions(response.sessions || [])
+      const response = await listSessions()
+      setSessions(response || [])
     } catch (err) {
       setErrorSessions(err.message || 'Erro ao carregar sessões')
     } finally {

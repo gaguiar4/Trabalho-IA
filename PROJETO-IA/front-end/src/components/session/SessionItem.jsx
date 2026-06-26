@@ -7,9 +7,9 @@ function SessionItem({ session, isActive, onClick }) {
       onClick={onClick}
       aria-current={isActive ? 'true' : undefined}
     >
-      <span className="session-item__name">{session.name}</span>
-      <span className="session-item__last-message">{session.lastMessage}</span>
-      <span className="session-item__timestamp">{formatTimestamp(session.timestamp)}</span>
+      <span className="session-item__name">{session.title}</span>
+      <span className="session-item__last-message">{session.lastMessage || 'Nenhuma mensagem'}</span>
+      <span className="session-item__timestamp">{formatTimestamp(session.updatedAt)}</span>
     </button>
   )
 }

@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react'
-import { sendMessage, getHistory } from '../services/chatService.js'
+import { createSession, sendMessage, getHistory } from '../services/chatService.js'
 import { isValidMessage } from '../utils/validators.js'
 
 export function useChat() {
@@ -17,33 +17,34 @@ export function useChat() {
   const send = useCallback(async (text) => {
     if (!isValidMessage(text)) return
 
-    if (!currentSessionId) {
-      setCurrentSessionId(crypto.randomUUID())
-    }
-
-    const userMessage = {
-      id: crypto.randomUUID(),
-      text,
-      sender: 'user',
-      timestamp: new Date().toISOString(),
-    }
-
-    setMessages((prev) => [...prev, userMessage])
-    setIsLoading(true)
-    setError(null)
+    let sessionId = currentSessionId
 
     try {
-      const response = await sendMessage(currentSessionId, text)
+      if (!sessionId) {
+        const sessionResponse = await createSession()
+        sessionId = sessionResponse.id
+        setCurrentSessionId(sessionId)
+      }
+
+      const userMessage = {
+        id: crypto.randomUUID(),
+        text,
+        sender: 'user',
+        timestamp: new Date().toISOString(),
+      }
+
+      setMessages((prev) => [...prev, userMessage])
+      setIsLoading(true)
+      setError(null)
+
+      const response = await sendMessage(sessionId, text)
       const assistantMessage = {
         id: crypto.randomUUID(),
-        text: response.message.text,
+        text: response.content,
         sender: 'assistant',
-        timestamp: response.message.timestamp || new Date().toISOString(),
+        timestamp: response.createdAt || new Date().toISOString(),
       }
       setMessages((prev) => [...prev, assistantMessage])
-      if (response.sessionId) {
-        setCurrentSessionId(response.sessionId)
-      }
     } catch (err) {
       setError(err.message || 'Erro ao enviar mensagem')
     } finally {
