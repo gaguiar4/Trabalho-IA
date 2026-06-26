@@ -4,7 +4,7 @@ import Icon from '../shared/Icon.jsx'
 
 function MessageInput({ onSend, isDisabled }) {
   const [text, setText] = useState('')
-
+  
   function handleSubmit(e) {
     e.preventDefault()
     if (!text.trim()) return
@@ -29,7 +29,7 @@ function MessageInput({ onSend, isDisabled }) {
         disabled={isDisabled || !text.trim()}
         ariaLabel="Enviar mensagem"
       >
-        <Icon name="send" size="sm" />
+        Enviar
       </Button>
     </form>
   )

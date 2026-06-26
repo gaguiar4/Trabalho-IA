@@ -10,7 +10,7 @@ function Icon({ name, size = 'md', ariaHidden = true }) {
       aria-hidden={ariaHidden}
       role="img"
     >
-      <use href={`/icons.svg#${name}`} />
+      <use href={`/dist/opicons.svg#${name}`} />
     </svg>
   )
 }

@@ -32,7 +32,7 @@ export function uploadFile(file, onProgress) {
       reject({ message: 'Erro de conexão', status: 0 })
     }
 
-    xhr.open('POST', `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080'}/api/upload`)
+    xhr.open('POST', '/api/v1/documents/upload')
     xhr.send(formData)
   })
 }
