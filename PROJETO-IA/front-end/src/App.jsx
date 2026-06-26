@@ -1,5 +1,11 @@
+import ChatPage from './pages/ChatPage.jsx'
+
 function App() {
-  return <div>Hello World</div>
+  return (
+    <>
+      <ChatPage />
+    </>
+  )
 }
 
 export default App
