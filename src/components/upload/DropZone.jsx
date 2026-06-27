@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, Children } from 'react'
 
 function DropZone({ onDrop, disabled, children }) {
   const [isDragActive, setIsDragActive] = useState(false)
@@ -20,6 +20,10 @@ function DropZone({ onDrop, disabled, children }) {
     onDrop(Array.from(e.dataTransfer.files))
   }
 
+  function openFileDialog() {
+    if (!disabled) inputRef.current?.click()
+  }
+
   function handleChange(e) {
     onDrop(Array.from(e.target.files))
     e.target.value = ''
@@ -31,6 +35,7 @@ function DropZone({ onDrop, disabled, children }) {
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
+      onClick={openFileDialog}
       aria-label="Área de upload"
     >
       <input
@@ -43,7 +48,11 @@ function DropZone({ onDrop, disabled, children }) {
         multiple
         aria-hidden="true"
       />
-      {children}
+      {Children.count(children) === 0 ? (
+        <p className="drop-zone__placeholder">Arraste um arquivo .txt ou .pdf</p>
+      ) : (
+        children
+      )}
     </div>
   )
 }

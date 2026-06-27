@@ -377,16 +377,33 @@
 .drop-zone {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-2);
-  padding: var(--spacing-4) var(--spacing-6);
-  border-top: 1px solid var(--color-border);
-  transition: background-color 0.15s;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-3);
+  padding: var(--spacing-8) var(--spacing-6);
+  min-height: 180px;
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  margin: var(--spacing-4);
+  transition: background-color 0.15s, border-color 0.15s;
+  cursor: pointer;
 }
 
-.drop-zone--active { background-color: rgb(37 99 235 / 0.05); }
+.drop-zone:hover { border-color: var(--color-primary); }
+.drop-zone--active {
+  background-color: rgb(37 99 235 / 0.08);
+  border-color: var(--color-primary);
+}
 .drop-zone--disabled { opacity: 0.5; pointer-events: none; }
 
 .drop-zone__input { display: none; }
+
+.drop-zone__placeholder {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  text-align: center;
+  pointer-events: none;
+}
 
 /* ── Health: StatusDot ───────────────────────────────────── */
 
