@@ -1,5 +1,20 @@
 # Projeto IA – Front-end
 
+## Grupo 4
+
+> **Serratec Residência de Software · Sala 34 · Trabalho avaliativo · disciplina de Inteligência Artificial**
+
+---
+
+## Integrantes
+
+- DIANA MONTEIRO
+- GABRIEL AGUIAR
+- KAIQUE ABRANCHES
+- ROBERTA ROCHA
+
+---
+
 ## 📖 Sobre o Projeto
 
 Este repositório contém o desenvolvimento do **Front-end** da aplicação de chat com suporte a upload de arquivos, desenvolvida como parte da disciplina de Inteligência Artificial do **Serratec**.
@@ -211,12 +226,12 @@ O front-end consome uma API REST desenvolvida em Spring Boot.
 
 Endpoints utilizados:
 
-| Método | Endpoint | Finalidade |
-|---------|----------|------------|
-| GET | `/api/health` | Verificar disponibilidade da API |
-| POST | `/api/chat` | Enviar mensagem |
-| GET | `/api/chat/{sessionId}` | Recuperar histórico |
-| POST | `/api/upload` | Upload de arquivos |
+| Método | Endpoint                | Finalidade                       |
+| ------ | ----------------------- | -------------------------------- |
+| GET    | `/api/health`           | Verificar disponibilidade da API |
+| POST   | `/api/chat`             | Enviar mensagem                  |
+| GET    | `/api/chat/{sessionId}` | Recuperar histórico              |
+| POST   | `/api/upload`           | Upload de arquivos               |
 
 ---
 
