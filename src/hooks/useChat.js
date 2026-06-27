@@ -58,7 +58,13 @@ export function useChat() {
     try {
       const response = await getHistory(sessionId)
       setCurrentSessionId(sessionId)
-      setMessages(response.messages || [])
+      const mapped = (response.messages || []).map((msg) => ({
+        id: msg.id,
+        text: msg.content,
+        sender: msg.role?.toLowerCase() === 'assistant' ? 'assistant' : 'user',
+        timestamp: msg.createdAt || new Date().toISOString(),
+      }))
+      setMessages(mapped)
     } catch (err) {
       setError(err.message || 'Erro ao carregar histórico')
     } finally {
