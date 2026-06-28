@@ -1,8 +1,13 @@
-export function uploadFile(file, onProgress) {
+import { getToken } from './tokenService.js'
+
+export function uploadFile(file, onProgress, sessionId) {
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest()
     const formData = new FormData()
     formData.append('file', file)
+    if (sessionId != null) {
+      formData.append('sessionId', sessionId)
+    }
 
     xhr.upload.onprogress = (event) => {
       if (event.lengthComputable && onProgress) {
@@ -33,6 +38,10 @@ export function uploadFile(file, onProgress) {
     }
 
     xhr.open('POST', '/api/v1/documents/upload')
+    const token = getToken()
+    if (token) {
+      xhr.setRequestHeader('Authorization', `Bearer ${token}`)
+    }
     xhr.send(formData)
   })
 }

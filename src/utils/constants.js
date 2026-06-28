@@ -16,3 +16,15 @@ export const UPLOAD_STATUS = {
   SUCCESS: 'success',
   ERROR: 'error',
 }
+
+export const INGESTION_STATUS = {
+  IDLE: 'IDLE',
+  QUEUED: 'QUEUED',
+  PARSING: 'PARSING',
+  CHUNKING: 'CHUNKING',
+  EMBEDDING: 'EMBEDDING',
+  READY: 'READY',
+  FAILED: 'FAILED',
+}
+
+export const INGESTION_POLL_INTERVAL = 3000

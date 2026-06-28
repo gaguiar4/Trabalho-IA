@@ -8,7 +8,7 @@ function SessionItem({ session, isActive, onClick }) {
       aria-current={isActive ? 'true' : undefined}
     >
       <span className="session-item__name">{session.title}</span>
-      <span className="session-item__last-message">{session.lastMessage || 'Nenhuma mensagem'}</span>
+      <span className="session-item__last-message">{session.lastMessage || 'Nova conversa'}</span>
       <span className="session-item__timestamp">{formatTimestamp(session.updatedAt)}</span>
     </button>
   )
