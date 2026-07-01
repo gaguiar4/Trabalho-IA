@@ -1,4 +1,5 @@
 import { formatTimestamp } from '../../utils/formatters.js'
+import SourcePanel from './SourcePanel.jsx'
 
 function MessageBubble({ message, isUser }) {
   return (
@@ -19,24 +20,7 @@ function MessageBubble({ message, isUser }) {
           ))}
         </div>
       )}
-      {!isUser && message.sources?.length > 0 && (
-        <details className="message-bubble__sources">
-          <summary className="message-bubble__sources-summary">
-            Fontes ({message.sources.length})
-          </summary>
-          <div className="message-bubble__sources-list">
-            {message.sources.map((src, i) => (
-              <div key={i} className="message-bubble__source-item">
-                <span className="message-bubble__source-name">{src.documentName}</span>
-                <span className="message-bubble__source-score">
-                  {Math.round(src.relevanceScore * 100)}%
-                </span>
-                <p className="message-bubble__source-excerpt">{src.excerpt}</p>
-              </div>
-            ))}
-          </div>
-        </details>
-      )}
+      {!isUser && <SourcePanel sources={message.sources} />}
       <span className="message-bubble__timestamp">{formatTimestamp(message.timestamp)}</span>
     </div>
   )

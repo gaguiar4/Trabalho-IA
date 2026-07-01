@@ -5,15 +5,6 @@ import { triggerIngestion, getIngestionStatus } from '../services/ingestionServi
 import { isValidMessage } from '../utils/validators.js'
 import { INGESTION_STATUS, INGESTION_POLL_INTERVAL } from '../utils/constants.js'
 
-function parseMetadata(metadataStr) {
-  if (!metadataStr) return null
-  try {
-    return JSON.parse(metadataStr)
-  } catch {
-    return null
-  }
-}
-
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms))
 }
@@ -85,7 +76,7 @@ export function useChat() {
         text: response.content,
         sender: 'assistant',
         timestamp: response.createdAt || new Date().toISOString(),
-        sources: parseMetadata(response.metadata),
+        sources: response.sources ?? null,
       }
       setMessages((prev) => [...prev, assistantMessage])
     } catch (err) {
@@ -107,7 +98,7 @@ export function useChat() {
         text: msg.content,
         sender: msg.role?.toLowerCase() === 'assistant' ? 'assistant' : 'user',
         timestamp: msg.createdAt || new Date().toISOString(),
-        sources: msg.role?.toLowerCase() === 'assistant' ? parseMetadata(msg.metadata) : undefined,
+        sources: msg.role?.toLowerCase() === 'assistant' ? (msg.sources ?? null) : undefined,
       }))
       setMessages(mapped)
     } catch (err) {
